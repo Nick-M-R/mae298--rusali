@@ -8,11 +8,11 @@ import openmdao.api as om
 # build the model
 prob = om.Problem()
 
-prob.model.add_subsystem('paraboloid', om.ExecComp('f = 0.1*(x + y) - np.abs(np.sin(x)*np.cos(y)*e^(np.abs((1-(x^2+y^2)^(1/2))/np.pi)))'))
+prob.model.add_subsystem('paraboloid', om.ExecComp('f = 0.1*(x + y) - abs(sin(x)*cos(y)*e**(abs((1-(x**2+y**2)**(1/2))/pi)))'))
 
 # setup the optimization
 prob.driver = om.ScipyOptimizeDriver()
-prob.driver.options['optimizer'] = 'SLSQR' #Type of Optimizer
+prob.driver.options['optimizer'] = 'SLSQP' #Type of Optimizer
 
 prob.model.add_design_var('paraboloid.x', lower=-50, upper=50)
 prob.model.add_design_var('paraboloid.y', lower=-50, upper=50)
